@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://db2vimois3ljd"]
+
+[ext_resource type="Texture2D" uid="uid://cqwjde8p2syn3" path="res://resources/Feather.png" id="1_y140l"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8i5f6"]
+friction = 0.5
+rough = true
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xhcnu"]
+size = Vector2(264.511, 80.2191)
+
+[node name="Feather" type="RigidBody2D" groups=["object"]]
+mass = 0.1
+physics_material_override = SubResource("PhysicsMaterial_8i5f6")
+gravity_scale = 0.2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_y140l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(9.99999, 10)
+rotation = -0.785398
+scale = Vector2(0.470493, 0.493623)
+shape = SubResource("RectangleShape2D_xhcnu")

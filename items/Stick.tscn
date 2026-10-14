@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://rvf80o5mq8f3"]
+
+[ext_resource type="Texture2D" uid="uid://bmfou65wj6i40" path="res://resources/Stick.png" id="2_6fqqe"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8i5f6"]
+friction = 0.8
+rough = true
+bounce = 0.2
+absorbent = true
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xhcnu"]
+size = Vector2(402.357, 41.0122)
+
+[node name="Stick" type="RigidBody2D" groups=["object"]]
+mass = 0.4
+physics_material_override = SubResource("PhysicsMaterial_8i5f6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.484199, 0.479999)
+texture = ExtResource("2_6fqqe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, -7)
+rotation = -0.785398
+scale = Vector2(0.470493, 0.493623)
+shape = SubResource("RectangleShape2D_xhcnu")

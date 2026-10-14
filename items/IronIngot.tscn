@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgbnit03rtl2p"]
+
+[ext_resource type="Texture2D" uid="uid://dbem04js4qnfu" path="res://resources/IronIngot.png" id="1_qvi4r"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8i5f6"]
+rough = true
+
+[node name="IronIngot" type="RigidBody2D" groups=["object"]]
+mass = 2.0
+physics_material_override = SubResource("PhysicsMaterial_8i5f6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.484199, 0.479999)
+texture = ExtResource("1_qvi4r")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-48, 16, -48, -16, 16, -40, 48, -16, 48, 8, -24, 40)

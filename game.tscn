@@ -1,0 +1,88 @@
+[gd_scene load_steps=11 format=3 uid="uid://bdh2fgcs6c440"]
+
+[ext_resource type="Script" path="res://game.gd" id="1_6e5lw"]
+[ext_resource type="Texture2D" uid="uid://bif8be8bjs6y5" path="res://resources/Table.png" id="1_o3dtw"]
+[ext_resource type="Texture2D" uid="uid://dm6l0u07uo7nm" path="res://resources/minecraft-wallpaper.jpg" id="2_lvn2f"]
+[ext_resource type="PackedScene" uid="uid://v7xuekd2ptnq" path="res://object_spawner.tscn" id="2_t5783"]
+[ext_resource type="PackedScene" uid="uid://vq0v75x2x04i" path="res://objects_list.tscn" id="4_7gha2"]
+[ext_resource type="Script" path="res://stats.gd" id="5_r3yec"]
+[ext_resource type="Script" path="res://game_over_detection.gd" id="6_rqat6"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_xchor"]
+font_color = Color(1, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_h8srn"]
+font_size = 48
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cdpmd"]
+size = Vector2(4280, 20)
+
+[node name="Game" type="Node2D" node_paths=PackedStringArray("camera")]
+script = ExtResource("1_6e5lw")
+camera = NodePath("Camera2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 3
+position = Vector2(528, -600)
+scale = Vector2(1.30473, 1.14688)
+texture = ExtResource("2_lvn2f")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0, 256)
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(562, 812)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("1_o3dtw")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(-496, -744)
+scale = Vector2(1.9, 1.9)
+polygon = PackedVector2Array(273.684, 534.737, 273.684, 492.632, 307.368, 534.737, 804.211, 534.737, 842.105, 492.632, 842.105, 534.737, 842.105, 1103.16, 273.684, 1103.16)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(562, 323)
+
+[node name="Label" type="Label" parent="Camera2D"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.5
+offset_top = -11.5
+offset_right = 48.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3.49109, 3.92582)
+pivot_offset = Vector2(48.5521, 11.5899)
+text = "GAME OVER!"
+label_settings = SubResource("LabelSettings_xchor")
+
+[node name="stats" type="Label" parent="Camera2D"]
+offset_left = -562.0
+offset_top = -323.0
+offset_right = -290.0
+offset_bottom = -275.0
+label_settings = SubResource("LabelSettings_h8srn")
+script = ExtResource("5_r3yec")
+
+[node name="ObjectSpawner" parent="." node_paths=PackedStringArray("objectList") instance=ExtResource("2_t5783")]
+objectList = NodePath("../objectsList")
+
+[node name="objectsList" parent="." instance=ExtResource("4_7gha2")]
+
+[node name="GameOverDetection" type="Area2D" parent="."]
+script = ExtResource("6_rqat6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameOverDetection"]
+position = Vector2(562, 1592)
+shape = SubResource("RectangleShape2D_cdpmd")
+
+[connection signal="items" from="objectsList" to="Camera2D/stats" method="_on_objects_list_items"]
+[connection signal="stacktop" from="objectsList" to="." method="_on_objects_list_stacktop"]
+[connection signal="stacktop" from="objectsList" to="Camera2D/stats" method="_on_objects_list_stacktop"]
+[connection signal="body_entered" from="GameOverDetection" to="GameOverDetection" method="_on_body_entered"]

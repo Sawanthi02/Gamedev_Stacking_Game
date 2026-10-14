@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://gjj8uyc0nq6s"]
+
+[ext_resource type="Texture2D" uid="uid://0amreh2n7yep" path="res://resources/slimeball.png" id="1_diywl"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8i5f6"]
+rough = true
+bounce = 0.7
+
+[node name="SlimeBall" type="RigidBody2D" groups=["object"]]
+mass = 0.25
+physics_material_override = SubResource("PhysicsMaterial_8i5f6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.268058, 0.28214)
+texture = ExtResource("1_diywl")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(1, -47, 27, -29, 45, -2, 27, 22, 3, 40, -22, 22, -39, -2, -22, -29)

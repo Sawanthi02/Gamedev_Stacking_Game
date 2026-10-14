@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqe2ofye6f475"]
+
+[ext_resource type="Texture2D" uid="uid://bmky2wtgufplq" path="res://resources/Totem.png" id="1_tx26p"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8i5f6"]
+friction = 0.5
+rough = true
+bounce = 0.2
+
+[node name="Stick" type="RigidBody2D"]
+mass = 0.7
+physics_material_override = SubResource("PhysicsMaterial_8i5f6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.099)
+texture = ExtResource("1_tx26p")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-24, -48, 28, -48, 28, -3, 49, -3, 49, 11, 21, 30, 15, 49, -12, 49, -18, 30, -45, 10, -45, -3, -25, -3, -26, -48)
